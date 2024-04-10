@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: backend-container
+    command: ./run.sh
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/app

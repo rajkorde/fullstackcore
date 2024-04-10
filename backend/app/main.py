@@ -15,7 +15,7 @@ def root() -> dict:
     """
     Root GET content
     """
-    return {"msg": "Hello World"}
+    return {"msg": "Hello World!!"}
 
 app.include_router(api_router, prefix=settings.API_V1_STRING)
 app.include_router(root_router)
