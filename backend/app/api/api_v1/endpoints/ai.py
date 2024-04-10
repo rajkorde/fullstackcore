@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from openai import OpenAI
 
 from app.schemas.interaction import Question, Answer
 
@@ -12,7 +13,19 @@ def answer(
     """
     Get a question answered through AI
     """
-    answer = "Test answer"
+
+    client = OpenAI()
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": question.question}
+        ]
+    )
+    answer = completion.choices[0].message.content
+
+    # answer = "Test answer"
 
     # get answer from client
 
