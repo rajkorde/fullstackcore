@@ -12,14 +12,10 @@ app = FastAPI(title="Simple API", openapi_url=f"{settings.API_V1_STRING}/openapi
 root_router = APIRouter()
 
 # Set all CORS enabled origins
-
 if settings.BACKEND_CORS_ORIGIN:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[
-            "http://localhost:3000",
-            "http://localhost:8001"
-        ],
+        allow_origins=settings.BACKEND_CORS_ORIGIN,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"]

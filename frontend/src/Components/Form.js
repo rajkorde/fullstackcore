@@ -27,10 +27,14 @@ function Form() {
     }
 
     setIsLoading(true)
-    // TODO: try catch
-    await fetch(`${process.env.REACT_APP_API_BASE_URL}/ai`, requestOptions)
-        .then(response => response.json())
-        .then(data => setAnswer(data.answer))
+    try {
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}/ai`, requestOptions)
+      .then(response => response.json())
+      .then(data => setAnswer(data.answer))
+    } catch (err) {
+      console.log(err)
+      setAnswer(err.message)
+    }
 
     setIsLoading(false)
     //setAnswer("test answer")

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from openai import OpenAI
 
 from app.schemas.interaction import Question, Answer
@@ -15,20 +15,20 @@ def answer(
     """
 
     client = OpenAI()
-    print(question.question)
 
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": question.question}
-        ]
-    )
-    answer = completion.choices[0].message.content
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": question.question}
+            ]
+        )
+        answer = completion.choices[0].message.content
+    except:
+        return HTTPException(status_code=500, detail="LLM failed to generate response.")
 
     # answer = "Test answer"
-
-    # get answer from client
 
     return {
         "question": question.question,
