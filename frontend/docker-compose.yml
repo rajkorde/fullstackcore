@@ -1,0 +1,9 @@
+services:
+  react:
+    build: .
+    container_name: frontend-container
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app

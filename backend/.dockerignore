@@ -3,3 +3,4 @@ Dockerfile
 **/__pycache__/
 **/*.py[cod]
 .env
+.ipynb_checkpoints
