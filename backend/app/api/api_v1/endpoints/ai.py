@@ -15,6 +15,7 @@ def answer(
     """
 
     client = OpenAI()
+    print(question.question)
 
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",

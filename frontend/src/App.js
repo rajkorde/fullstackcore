@@ -5,7 +5,7 @@ import Form from "./Components/Form";
 function App() {
   return (
     <div className="App container">
-      <h1>Simple QA</h1>
+      <p className="fs-1 mt-3">Simple QA</p>
       <Form />
     </div>
   );

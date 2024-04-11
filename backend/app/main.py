@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api.api_v1.api import api_router
@@ -9,6 +10,20 @@ from app.api.api_v1.api import api_router
 app = FastAPI(title="Simple API", openapi_url=f"{settings.API_V1_STRING}/openapi.json")
 
 root_router = APIRouter()
+
+# Set all CORS enabled origins
+
+if settings.BACKEND_CORS_ORIGIN:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[
+            "http://localhost:3000",
+            "http://localhost:8001"
+        ],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
+    )
 
 @root_router.get("/", status_code=200)
 def root() -> dict:
